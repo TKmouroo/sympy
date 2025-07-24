@@ -1,0 +1,60 @@
+import sympy as sp
+
+# Definir las variables simbólicas
+x, y, z, t = sp.symbols('x y z t')
+
+# Definir la matriz
+A = sp.Matrix([
+    [2, 1, 1, x],
+    [1, 2, 1, y],
+    [1, 1, 2, z],
+    [1, 1, 1, t]
+])
+
+print("Matriz original:")
+sp.pprint(A)
+
+# Calcular el determinante paso a paso
+print("\nPaso 1: Expansión por cofactores a lo largo de la primera fila")
+
+# Menores
+M11 = A.minor_submatrix(0, 0)
+M12 = A.minor_submatrix(0, 1)
+M13 = A.minor_submatrix(0, 2)
+M14 = A.minor_submatrix(0, 3)
+
+print("\nMenor M11 (eliminando fila 1, columna 1):")
+sp.pprint(M11)
+det_M11 = M11.det()
+print(f"Determinante de M11: {det_M11}")
+
+print("\nMenor M12 (eliminando fila 1, columna 2):")
+sp.pprint(M12)
+det_M12 = M12.det()
+print(f"Determinante de M12: {det_M12}")
+
+print("\nMenor M13 (eliminando fila 1, columna 3):")
+sp.pprint(M13)
+det_M13 = M13.det()
+print(f"Determinante de M13: {det_M13}")
+
+print("\nMenor M14 (eliminando fila 1, columna 4):")
+sp.pprint(M14)
+det_M14 = M14.det()
+print(f"Determinante de M14: {det_M14}")
+
+# Cálculo del determinante
+det_A = 2*det_M11 - 1*det_M12 + 1*det_M13 - x*det_M14
+
+print("\nPaso 2: Cálculo del determinante usando la expansión por cofactores")
+print(f"det(A) = 2*({det_M11}) - 1*({det_M12}) + 1*({det_M13}) - x*({det_M14})")
+
+# Simplificar el resultado
+det_A_simplified = sp.simplify(det_A)
+
+print("\nPaso 3: Simplificación del resultado")
+print(f"det(A) = {det_A}")
+print(f"Forma simplificada: {det_A_simplified}")
+
+print("\nResultado final:")
+print(f"det(A) = {det_A_simplified}")
